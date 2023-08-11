@@ -72,27 +72,29 @@
     .dropdown {
       position: relative;
       display: inline-block;
+
     }
     
     .dropbtn {
-      font-size: 16px;
+      font-size: 22px;
       font-weight: bold;
       border: none;
-      background-color: #fff3cd;
       cursor: pointer;
       border-radius: 5px;
+      width: 400px;
+      text-align: left;
+      padding: 0 10px;
+      background-image: linear-gradient(to right, #85e6d5, #0bbac7);
     }
     
     .dropdown-content {
       display: none;
       position: absolute;
       background-color: rgb(255, 243, 211);
-      min-width: 160px;
+      width: 100%;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
       border-radius: 5px;
-      max-height: 200px;
-      overflow-y: auto;
       border: 1px solid #009f7e;
     }
     
@@ -106,14 +108,9 @@
     .dropdown-content a:hover {
       background-color:  rgb(248, 227, 167);
     }
+
     
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    
-    .dropdown:hover .dropbtn {
-      background-color: rgb(255, 243, 211);
-    }
+  
 
     .date-picker{
         display: flex;
@@ -131,6 +128,22 @@
         margin: 0 10px 0 0;
         font-size: 20px;
 
+    }
+    .dropdown-flex{
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    }
+    .type3{
+        display: flex;
+        align-items: center;
+        align-items: center;
+    }
+
+    .type3 p {
+        margin: 0 15px 0;
+        font-size: 20px;
+        font-weight: bold;
     }
 </style>
 <body>
@@ -156,12 +169,33 @@
             <p>日期區間:</p>
             <input type="text" id="date-range-picker" placeholder="選擇日期區間">
         </div>
+        <div class="dropdown-flex">
+            <div class="dropdown">
+                <button class="dropbtn dropbtn1">1. 單一策略績效</button>
+                <div class="dropdown-content dropdown1-content">
+                    <a href="#">1. 單一策略績效</a>
+                    <a href="#">2. 指定策略績效(策略a+b+c)</a>
+                    <a href="#">3. 連動某一人喊單人績效</a>
+                    <a href="#">4. 主觀喊單人績效</a>
+                    <a href="#">5. 當天績效</a>
+                    <a href="#">6. 指定區間績效(日期起迄)</a>
+                </div>
+            </div>
+            <div class="type3">
+                <p>損益</p>
+                <input type="text" value="+0000000元">
+            </div>
+        </div>
+
         <div class="dropdown">
             <button class="dropbtn">1. 單一策略績效</button>
             <div class="dropdown-content">
                 <a href="#">1. 單一策略績效</a>
                 <a href="#">2. 指定策略績效(策略a+b+c)</a>
-                <a href="#">3. 單一策略績效</a>
+                <a href="#">3. 連動某一人喊單人績效</a>
+                <a href="#">4. 主觀喊單人績效</a>
+                <a href="#">5. 當天績效</a>
+                <a href="#">6. 指定區間績效(日期起迄)</a>
             </div>
         </div>
         <button type="button" class="button">查詢</button>
@@ -172,6 +206,18 @@
         flatpickr("#date-range-picker", {
             mode: "range",
             dateFormat: "Y/m/d",
+        });
+
+        document.querySelector('.dropbtn1').addEventListener('click', (e) => {
+            document.querySelector('.dropdown1-content').style.display = 'block';
+        });
+
+        const dropdownLinks = document.querySelectorAll('.dropdown1-content a');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelector('.dropbtn1').innerText = e.target.innerText;
+                document.querySelector('.dropdown1-content').style.display = 'none';
+            });
         });
     </script>
 </body>
